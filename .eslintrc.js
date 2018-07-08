@@ -11,6 +11,7 @@ module.exports = {
         "sourceType": "script"
     },
     "rules": {
+        "no-unused-vars":"warn",
         "no-console": [
           "error",{
             "allow": ["warn","error","info"]
