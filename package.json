@@ -1,0 +1,19 @@
+{
+  "name": "anydoor",
+  "version": "1.0.0",
+  "description": "a static resouces web",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bedlamiteTang/AnyDoor.git"
+  },
+  "author": "bedlamite",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bedlamiteTang/AnyDoor/issues"
+  },
+  "homepage": "https://github.com/bedlamiteTang/AnyDoor#readme"
+}
