@@ -3,6 +3,7 @@ const promisify = require('util').promisify;
 const handlebars = require('handlebars');
 const path = require('path');
 const config = require('../config/defaultConfig');
+const mimetype = require('./mime');
 const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
 
@@ -19,19 +20,21 @@ module.exports = async function (req,res,filePath) {
             fs.createReadStream(filePath).pipe(res);
         }else if(stats.isDirectory()){
             const files = await readdir(filePath);
+            const fileMimeType = mimetype(filePath);
             res.statusCode = 200;
-            res.setHeader('Content-Type','text,plain');
+            res.setHeader('Content-Type',fileMimeType);
+            const dir = path.relative(config.root,filePath);
             const data = {
                 title: path.basename(filePath),
-                dir: path.relative(config.root,filePath),
+                dir: dir ? `/${dir}` : '',
                 files
             };
             res.end(template(data));
         }
     } catch (error) {
+        console.error(error);
         res.statusCode = 404;
         res.setHeader('Content-Type','text/plain');
-        res.write(error.toString()+'\n');
         res.end(`${filePath} is not a directory or file`);
     }
 };
